@@ -68,7 +68,15 @@ function add_row() {
   })
     .then((response) => response.json())
     .then((data) => {
-      displayBooks();
+      // Add new book data at the beginning of the booksData array
+      booksData.unshift(data);
+      renderBooksTable();
+
+      // Simulate clicking on the "Edit" button for the first row
+      edit_row(1);
+
+      // Set focus to the book title input box of the first row
+      document.getElementById(`title_1`).focus();
     })
     .catch((error) => {
       console.error("Error:", error);
