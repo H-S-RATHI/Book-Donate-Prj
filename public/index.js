@@ -51,12 +51,45 @@ function renderBooksTable() {
 }
 
 function add_row() {
+  const table = document.getElementById("data_table");
+
+  // Creating a new empty row
+  const newRow = `
+    <tr>
+      <td>${booksData.length + 1}</td>
+      <td contenteditable="true" id="new_title" placeholder="Enter Title"></td>
+      <td contenteditable="true" id="new_author" placeholder="Enter Author"></td>
+      <td contenteditable="true" id="new_genre" placeholder="Enter Genre"></td>
+      <td contenteditable="true" id="new_year" placeholder="Enter Date"></td>
+      <td contenteditable="true" id="new_isbn" placeholder="Enter ISBN"></td>
+      <td>
+        <button onclick="saveNewBook()">Save</button>
+      </td>
+    </tr>
+  `;
+
+  // Inserting the new row after the table heading
+  const headerRow = table.querySelector("tr");
+  headerRow.insertAdjacentHTML("afterend", newRow);
+
+  // Update serial numbers for all rows
+
+  document.getElementById("new_title").focus();
+}
+
+function saveNewBook() {
+  const title = document.getElementById("new_title").innerText;
+  const author = document.getElementById("new_author").innerText;
+  const genre = document.getElementById("new_genre").innerText;
+  const year = document.getElementById("new_year").innerText;
+  const isbn = document.getElementById("new_isbn").innerText;
+
   const data = {
-    title: "New Book Title",
-    author: "Author Name",
-    genre: "genre",
-    year: "12/12/12",
-    isbn: "isbn",
+    title: title,
+    author: author,
+    genre: genre,
+    year: year,
+    isbn: isbn,
   };
 
   fetch(apiUrl, {
@@ -68,15 +101,8 @@ function add_row() {
   })
     .then((response) => response.json())
     .then((data) => {
-      // Add new book data at the beginning of the booksData array
-      booksData.unshift(data);
-      renderBooksTable();
-
-      // Simulate clicking on the "Edit" button for the first row
-      edit_row(1);
-
-      // Set focus to the book title input box of the first row
-      document.getElementById(`title_1`).focus();
+      booksData.push(data); // Add the new book to the booksData array
+      displayBooks(); // Re-render the table with updated data
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -93,6 +119,7 @@ function edit_row(rowId) {
   for (let i = 1; i <= 5; i++) {
     cells[i].contentEditable = true; // Enable content editing
   }
+  document.getElementById(`title_${rowId}`).focus();
 }
 
 function updateBook(bookId, rowId) {

@@ -58,3 +58,11 @@ button.update-button:hover,
 button.delete-button:hover {
   background-color: #d32f2f;
 }
+
+[contenteditable="true"]:empty:before {
+  content: attr(data-placeholder);
+  color: #888;
+}
+[contenteditable="true"]:focus:before {
+  content: "";
+}
