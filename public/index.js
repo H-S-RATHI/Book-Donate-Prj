@@ -29,11 +29,14 @@ function renderBooksTable() {
     const row = `
       <tr id="row${index + 1}">
         <td>${index + 1}</td>
-        <td contenteditable="true" id="title_${index + 1}">${book.title}</td>
-        <td contenteditable="true" id="author_${index + 1}">${book.author}</td>
+        <td contenteditable="false" id="title_${index + 1}">${book.title}</td>
+        <td contenteditable="false" id="author_${index + 1}">${book.author}</td>
         <td>
-          <button onclick="updateBook('${book._id}')">Update</button>
+          <button onclick="edit_row(${index + 1})">Edit</button>
           <button onclick="deleteBook('${book._id}')">Delete</button>
+          <button style="display:none" onclick="updateBook('${book._id}', ${
+      index + 1
+    })">Update</button>
         </td>
       </tr>
     `;
@@ -63,34 +66,55 @@ function add_row() {
     });
 }
 
-function edit_row(no) {
-  // Disable the 'Edit' button when editing starts
-  document
-    .getElementById("row" + no)
-    .querySelectorAll("button")[0].disabled = true;
-}
+function edit_row(rowId) {
+  const row = document.getElementById(`row${rowId}`);
+  const buttons = row.getElementsByTagName("button");
+  buttons[0].style.display = "none"; // Hide Edit button
+  buttons[2].style.display = "inline-block"; // Show Update button
 
-function update_row(no) {
-  const name = document.getElementById(`name_${no}`).innerText;
-  const age = document.getElementById(`age_${no}`).innerText;
-
-  // Assuming you have an API or database interaction to update data
-  // Here you can make an API call or perform any data update operation
-
-  // For now, log the updated data to the console
-  console.log(`Updated Name: ${name}, Updated Age: ${age}`);
-
-  // Enable the 'Edit' button after updating
-  document
-    .getElementById("row" + no)
-    .querySelectorAll("button")[0].disabled = false;
-}
-
-function delete_row(no) {
-  const row = document.getElementById("row" + no);
-  if (row) {
-    row.parentNode.removeChild(row);
+  const cells = row.getElementsByTagName("td");
+  for (let i = 1; i <= 2; i++) {
+    cells[i].contentEditable = true; // Enable content editing
   }
+}
+
+function updateBook(bookId, rowId) {
+  const title = document.getElementById(`title_${rowId}`).innerText;
+  const author = document.getElementById(`author_${rowId}`).innerText;
+
+  const data = {
+    title: title,
+    author: author,
+  };
+
+  fetch(`${apiUrl}/${bookId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((updatedBook) => {
+      booksData[rowId - 1] = updatedBook;
+      renderBooksTable();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+function deleteBook(bookId) {
+  fetch(`${apiUrl}/${bookId}`, {
+    method: "DELETE",
+  })
+    .then(() => {
+      booksData = booksData.filter((book) => book._id !== bookId);
+      renderBooksTable();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
 
 displayBooks();
