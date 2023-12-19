@@ -6,6 +6,19 @@
     <title>Bookstore CRUD</title>
   </head>
   <body>
+    <form id="userForm">
+      <label for="userName">Name:</label>
+      <input type="text" id="userName" name="userName" /><br /><br />
+
+      <label for="userEmail">Email:</label>
+      <input type="email" id="userEmail" name="userEmail" /><br /><br />
+
+      <label for="userPhone">Phone:</label>
+      <input type="tel" id="userPhone" name="userPhone" /><br /><br />
+
+      <button type="submit" onclick="submitUserDetails(event)">Submit</button>
+    </form>
+
     <button onclick="add_row()">Add Book</button>
     <table id="data_table">
       <!-- Table headers -->

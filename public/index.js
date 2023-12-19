@@ -78,11 +78,22 @@ function add_row() {
 }
 
 function saveNewBook() {
-  const title = document.getElementById("new_title").innerText;
-  const author = document.getElementById("new_author").innerText;
-  const genre = document.getElementById("new_genre").innerText;
-  const year = document.getElementById("new_year").innerText;
-  const isbn = document.getElementById("new_isbn").innerText;
+  const title = document.getElementById("new_title").innerText.trim();
+  const author = document.getElementById("new_author").innerText.trim();
+  const genre = document.getElementById("new_genre").innerText.trim();
+  const year = document.getElementById("new_year").innerText.trim();
+  const isbn = document.getElementById("new_isbn").innerText.trim();
+
+  if (
+    title === "" ||
+    author === "" ||
+    genre === "" ||
+    year === "" ||
+    isbn === ""
+  ) {
+    alert("Please fill in all fields.");
+    return;
+  }
 
   const data = {
     title: title,
@@ -123,11 +134,22 @@ function edit_row(rowId) {
 }
 
 function updateBook(bookId, rowId) {
-  const title = document.getElementById(`title_${rowId}`).innerText;
-  const author = document.getElementById(`author_${rowId}`).innerText;
-  const genre = document.getElementById(`genre_${rowId}`).innerText;
-  const year = document.getElementById(`year_${rowId}`).innerText;
-  const isbn = document.getElementById(`isbn_${rowId}`).innerText;
+  const title = document.getElementById(`title_${rowId}`).innerText.trim();
+  const author = document.getElementById(`author_${rowId}`).innerText.trim();
+  const genre = document.getElementById(`genre_${rowId}`).innerText.trim();
+  const year = document.getElementById(`year_${rowId}`).innerText.trim();
+  const isbn = document.getElementById(`isbn_${rowId}`).innerText.trim();
+
+  if (
+    title === "" ||
+    author === "" ||
+    genre === "" ||
+    year === "" ||
+    isbn === ""
+  ) {
+    alert("Please fill in all fields.");
+    return;
+  }
 
   const data = {
     title: title,
