@@ -9,6 +9,18 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  genre: {
+    type: String,
+    required: true,
+  },
+  year: {
+    type: String,
+    required: true,
+  },
+  isbn: {
+    type: String,
+    required: true,
+  },
 });
 
 const Book = mongoose.model("Book", bookSchema);

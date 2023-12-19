@@ -18,10 +18,13 @@ function renderBooksTable() {
   const table = document.getElementById("data_table");
   table.innerHTML = `
     <tr>
-      <th>ID</th>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Actions</th>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Genre</th>
+    <th>Year of Publication</th>
+    <th>ISBN</th>
+    <th>Actions</th>
     </tr>
   `;
 
@@ -31,6 +34,9 @@ function renderBooksTable() {
         <td>${index + 1}</td>
         <td contenteditable="false" id="title_${index + 1}">${book.title}</td>
         <td contenteditable="false" id="author_${index + 1}">${book.author}</td>
+        <td contenteditable="false" id="genre_${index + 1}">${book.genre}</td>
+        <td contenteditable="false" id="year_${index + 1}">${book.year}</td>
+        <td contenteditable="false" id="isbn_${index + 1}">${book.isbn}</td>
         <td>
           <button onclick="edit_row(${index + 1})">Edit</button>
           <button onclick="deleteBook('${book._id}')">Delete</button>
@@ -48,6 +54,9 @@ function add_row() {
   const data = {
     title: "New Book Title",
     author: "Author Name",
+    genre: "genre",
+    year: "12/12/12",
+    isbn: "isbn",
   };
 
   fetch(apiUrl, {
@@ -73,7 +82,7 @@ function edit_row(rowId) {
   buttons[2].style.display = "inline-block"; // Show Update button
 
   const cells = row.getElementsByTagName("td");
-  for (let i = 1; i <= 2; i++) {
+  for (let i = 1; i <= 5; i++) {
     cells[i].contentEditable = true; // Enable content editing
   }
 }
@@ -81,10 +90,16 @@ function edit_row(rowId) {
 function updateBook(bookId, rowId) {
   const title = document.getElementById(`title_${rowId}`).innerText;
   const author = document.getElementById(`author_${rowId}`).innerText;
+  const genre = document.getElementById(`genre_${rowId}`).innerText;
+  const year = document.getElementById(`year_${rowId}`).innerText;
+  const isbn = document.getElementById(`isbn_${rowId}`).innerText;
 
   const data = {
     title: title,
     author: author,
+    genre: genre,
+    year: year,
+    isbn: isbn,
   };
 
   fetch(`${apiUrl}/${bookId}`, {

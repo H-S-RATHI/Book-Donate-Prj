@@ -25,8 +25,8 @@ mongoose
 // Routes
 app.post("/books", async (req, res) => {
   try {
-    const { title, author } = req.body;
-    const book = new Book({ title, author });
+    const { title, author, genre, year, isbn } = req.body;
+    const book = new Book({ title, author, genre, year, isbn });
     const savedBook = await book.save();
     res.json(savedBook);
   } catch (error) {
@@ -46,10 +46,10 @@ app.get("/books", async (req, res) => {
 app.put("/books/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, author } = req.body;
+    const { title, author, genre, year, isbn } = req.body;
     const updatedBook = await Book.findByIdAndUpdate(
       id,
-      { title, author },
+      { title, author, genre, year, isbn },
       { new: true }
     );
     res.json(updatedBook);
