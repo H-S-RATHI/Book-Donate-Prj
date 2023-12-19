@@ -1,4 +1,58 @@
-/* Style for the table */
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Form Styles */
+#userForm {
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 60%;
+  margin: 0 auto;
+}
+
+#userForm label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#userForm input[type="text"],
+#userForm input[type="email"],
+#userForm input[type="tel"] {
+  width: calc(33.33% - 20px);
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 20px;
+  box-sizing: border-box;
+}
+
+#userForm button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#userForm button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Table Styles */
 table {
   border-collapse: collapse;
   width: 100%;
@@ -9,10 +63,9 @@ table th,
 table td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: center; /* Center-align text */
+  text-align: center;
 }
 
-/* Style for the buttons */
 button {
   padding: 8px 12px;
   cursor: pointer;
@@ -25,44 +78,4 @@ button {
 
 button:hover {
   background-color: #45a049;
-}
-
-/* Add Book button style */
-button.add-button {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-/* Form input style */
-input[type="text"],
-input[type="date"] {
-  padding: 8px;
-  width: 150px;
-}
-
-/* Set focus style for input fields */
-input:focus {
-  border: 1px solid #4caf50;
-  outline: none;
-}
-
-/* Update and Delete buttons style */
-button.update-button,
-button.delete-button {
-  display: inline-block;
-  background-color: #f44336;
-  margin-right: 5px;
-}
-
-button.update-button:hover,
-button.delete-button:hover {
-  background-color: #d32f2f;
-}
-
-[contenteditable="true"]:empty:before {
-  content: attr(data-placeholder);
-  color: #888;
-}
-[contenteditable="true"]:focus:before {
-  content: "";
 }
