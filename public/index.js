@@ -29,13 +29,21 @@ function renderBooksTable() {
   `;
 
   booksData.forEach((book, index) => {
+    const bookYear = new Date(book.year).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    });
+
     const row = `
       <tr id="row${index + 1}">
         <td>${index + 1}</td>
         <td contenteditable="false" id="title_${index + 1}">${book.title}</td>
         <td contenteditable="false" id="author_${index + 1}">${book.author}</td>
         <td contenteditable="false" id="genre_${index + 1}">${book.genre}</td>
-        <td contenteditable="false" id="year_${index + 1}">${book.year}</td>
+        <td contenteditable="false" id="year_${
+          index + 1
+        }">${bookYear}</td> <!-- Use formatted date -->
         <td contenteditable="false" id="isbn_${index + 1}">${book.isbn}</td>
         <td>
           <button onclick="edit_row(${index + 1})">Edit</button>
@@ -60,7 +68,7 @@ function add_row() {
       <td contenteditable="true" id="new_title" placeholder="Enter Title"></td>
       <td contenteditable="true" id="new_author" placeholder="Enter Author"></td>
       <td contenteditable="true" id="new_genre" placeholder="Enter Genre"></td>
-      <td contenteditable="true" id="new_year" placeholder="Enter Date"></td>
+      <td><input type="date" id="new_year" placeholder="Enter Date"></td>
       <td contenteditable="true" id="new_isbn" placeholder="Enter ISBN"></td>
       <td>
         <button onclick="saveNewBook()">Save</button>
@@ -81,7 +89,7 @@ function saveNewBook() {
   const title = document.getElementById("new_title").innerText.trim();
   const author = document.getElementById("new_author").innerText.trim();
   const genre = document.getElementById("new_genre").innerText.trim();
-  const year = document.getElementById("new_year").innerText.trim();
+  const year = document.getElementById("new_year").value;
   const isbn = document.getElementById("new_isbn").innerText.trim();
 
   if (
