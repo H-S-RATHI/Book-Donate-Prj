@@ -131,8 +131,28 @@ function saveNewBook() {
   })
     .then((response) => response.json())
     .then((data) => {
-      booksData.push(data);
-      displayBooks();
+      // Create a new row element
+      const newRow = document.createElement("tr");
+      newRow.innerHTML = `
+      <td>${booksData.length + 1}</td>
+      <td>${data.title}</td>
+      <td>${data.author}</td>
+      <td>${data.genre}</td>
+      <td>${new Date(data.year).toLocaleDateString()}</td>
+      <td>${data.isbn}</td>
+      <td>...buttons...</td>
+    `;
+      newRow.classList.add("animate-slide-in-down");
+
+      // Append the new row to the table
+      const table = document.getElementById("data_table");
+      table.appendChild(newRow);
+
+      // Update the local books data and re-render the table after the animation ends
+      newRow.addEventListener("animationend", () => {
+        booksData.push(data);
+        displayBooks(); // This will re-render the books table
+      });
     })
     .catch((error) => {
       console.error("Error:", error);

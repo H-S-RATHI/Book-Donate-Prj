@@ -79,3 +79,20 @@ button {
 button:hover {
   background-color: #45a049;
 }
+
+/* styles.css */
+/* styles.css */
+@keyframes slideInDown {
+  from {
+    transform: translateY(-500%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-down {
+  animation: slideInDown 1s ease-out forwards;
+}
