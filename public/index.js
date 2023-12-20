@@ -29,10 +29,11 @@ function renderBooksTable() {
   `;
 
   booksData.forEach((book, index) => {
-    const bookYear = new Date(book.year).toLocaleDateString("en-US", {
+    // Convert the date to dd-mm-yyyy format
+    const bookYear = new Date(book.year).toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
       year: "numeric",
-      month: "numeric",
-      day: "numeric",
     });
 
     const row = `
