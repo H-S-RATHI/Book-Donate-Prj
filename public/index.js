@@ -89,7 +89,7 @@ function saveNewBook() {
   const title = document.getElementById("new_title").innerText.trim();
   const author = document.getElementById("new_author").innerText.trim();
   const genre = document.getElementById("new_genre").innerText.trim();
-  const year = document.getElementById("new_year").value;
+  const year = document.getElementById("new_year").value; // Get date value from input
   const isbn = document.getElementById("new_isbn").innerText.trim();
 
   if (
@@ -100,6 +100,14 @@ function saveNewBook() {
     isbn === ""
   ) {
     alert("Please fill in all fields.");
+    return;
+  }
+
+  const enteredDate = new Date(year);
+  const today = new Date();
+
+  if (enteredDate > today) {
+    alert("Publication year cannot be in the future.");
     return;
   }
 
@@ -120,8 +128,8 @@ function saveNewBook() {
   })
     .then((response) => response.json())
     .then((data) => {
-      booksData.push(data); // Add the new book to the booksData array
-      displayBooks(); // Re-render the table with updated data
+      booksData.push(data);
+      displayBooks();
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -136,7 +144,19 @@ function edit_row(rowId) {
 
   const cells = row.getElementsByTagName("td");
   for (let i = 1; i <= 5; i++) {
-    cells[i].contentEditable = true; // Enable content editing
+    if (i !== 4) {
+      cells[i].contentEditable = true; // Enable content editing for non-date fields
+    } else {
+      const currentDate = new Date(cells[i].innerText)
+        .toISOString()
+        .split("T")[0]; // Get current date in 'yyyy-mm-dd' format
+      cells[
+        i
+      ].innerHTML = `<input type="date" id="edit_year_${rowId}" value="${currentDate}" max="${
+        new Date().toISOString().split("T")[0]
+      }">`;
+      // Display date input and set current date as max
+    }
   }
   document.getElementById(`title_${rowId}`).focus();
 }
@@ -145,7 +165,7 @@ function updateBook(bookId, rowId) {
   const title = document.getElementById(`title_${rowId}`).innerText.trim();
   const author = document.getElementById(`author_${rowId}`).innerText.trim();
   const genre = document.getElementById(`genre_${rowId}`).innerText.trim();
-  const year = document.getElementById(`year_${rowId}`).innerText.trim();
+  const year = document.getElementById(`edit_year_${rowId}`).value; // Get updated date value from the input field
   const isbn = document.getElementById(`isbn_${rowId}`).innerText.trim();
 
   if (
@@ -156,6 +176,14 @@ function updateBook(bookId, rowId) {
     isbn === ""
   ) {
     alert("Please fill in all fields.");
+    return;
+  }
+
+  const enteredDate = new Date(year);
+  const today = new Date();
+
+  if (enteredDate > today) {
+    alert("Publication year cannot be in the future.");
     return;
   }
 
