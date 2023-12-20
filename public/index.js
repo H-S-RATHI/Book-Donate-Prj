@@ -18,13 +18,13 @@ function renderBooksTable() {
   const table = document.getElementById("data_table");
   table.innerHTML = `
     <tr>
-    <th>ID</th>
-    <th>Title</th>
-    <th>Author</th>
-    <th>Genre</th>
-    <th>Year of Publication</th>
-    <th>ISBN</th>
-    <th>Actions</th>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Genre</th>
+      <th>Year of Publication</th>
+      <th>ISBN</th>
+      <th>Actions</th>
     </tr>
   `;
 
@@ -41,16 +41,18 @@ function renderBooksTable() {
         <td contenteditable="false" id="title_${index + 1}">${book.title}</td>
         <td contenteditable="false" id="author_${index + 1}">${book.author}</td>
         <td contenteditable="false" id="genre_${index + 1}">${book.genre}</td>
-        <td contenteditable="false" id="year_${
-          index + 1
-        }">${bookYear}</td> <!-- Use formatted date -->
+        <td contenteditable="false" id="year_${index + 1}">${bookYear}</td>
         <td contenteditable="false" id="isbn_${index + 1}">${book.isbn}</td>
         <td>
-          <button onclick="edit_row(${index + 1})">Edit</button>
-          <button onclick="deleteBook('${book._id}')">Delete</button>
-          <button style="display:none" onclick="updateBook('${book._id}', ${
+          <button id="edit_${index + 1}" onclick="edit_row(${
       index + 1
-    })">Update</button>
+    })">Edit</button>
+          <button style="display:none" id="update_${
+            index + 1
+          }" onclick="updateBook('${book._id}', ${index + 1})">Update</button>
+          <button id="delete_${index + 1}" onclick="deleteBook('${
+      book._id
+    }')">Delete</button>
         </td>
       </tr>
     `;
@@ -139,25 +141,27 @@ function saveNewBook() {
 function edit_row(rowId) {
   const row = document.getElementById(`row${rowId}`);
   const buttons = row.getElementsByTagName("button");
-  buttons[0].style.display = "none"; // Hide Edit button
-  buttons[2].style.display = "inline-block"; // Show Update button
 
+  // Hide Edit button and show Update button
+  buttons[0].style.display = "none";
+  buttons[1].style.display = "inline-block";
+
+  // Enable content editing for fields
   const cells = row.getElementsByTagName("td");
   for (let i = 1; i <= 5; i++) {
     if (i !== 4) {
-      cells[i].contentEditable = true; // Enable content editing for non-date fields
-    } else {
-      const currentDate = new Date(cells[i].innerText)
-        .toISOString()
-        .split("T")[0]; // Get current date in 'yyyy-mm-dd' format
-      cells[
-        i
-      ].innerHTML = `<input type="date" id="edit_year_${rowId}" value="${currentDate}" max="${
-        new Date().toISOString().split("T")[0]
-      }">`;
-      // Display date input and set current date as max
+      // Skip the date field for now
+      cells[i].contentEditable = true;
     }
   }
+
+  // Handle the date field separately to avoid timezone issues
+  const book = booksData[rowId - 1];
+  const bookDate = new Date(book.year);
+  const localDate = bookDate.toISOString().split("T")[0]; // Get the date part without converting to UTC
+
+  cells[4].innerHTML = `<input type="date" id="edit_year_${rowId}" value="${localDate}">`;
+
   document.getElementById(`title_${rowId}`).focus();
 }
 
