@@ -59,10 +59,6 @@ h1 {
   background-color: #286090;
 }
 
-button:hover {
-  background-color: #16e821;
-}
-
 .table_container {
   display: flex;
   justify-content: center;
@@ -96,6 +92,15 @@ button {
   background-color: #4caf50;
   color: white;
   margin-right: 5px;
+}
+.add_button {
+  padding: 8px 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: white;
+  margin-left: 5%;
 }
 
 button:hover {
@@ -171,6 +176,9 @@ button:hover {
     justify-content: space-around;
     width: 100%;
   }
+  .add_button {
+    margin-left: 1%;
+  }
   table {
     width: 100%;
   }
@@ -226,6 +234,9 @@ button:hover {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+  }
+  .add_button {
+    margin-left: 15%;
   }
 
   table {
