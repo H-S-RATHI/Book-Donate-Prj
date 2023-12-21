@@ -1,19 +1,19 @@
 let rowIdCounter = 1;
 const apiUrl = "http://localhost:3000/books";
-let booksData = []; // To store books data locally
+let booksData = [];
 
 document
   .getElementById("userForm")
   .addEventListener("submit", function (event) {
     event.preventDefault();
-    alert("Thank you for submitting your details!"); // Prevent the default form submission
+    alert("Thank you for submitting your details!");
     saveNewBook();
   });
 function displayBooks() {
   fetch(apiUrl)
     .then((response) => response.json())
     .then((data) => {
-      booksData = data; // Store fetched data locally
+      booksData = data;
       renderBooksTable();
     })
     .catch((error) => {
@@ -36,7 +36,6 @@ function renderBooksTable() {
   `;
 
   booksData.forEach((book, index) => {
-    // Convert the date to dd-mm-yyyy format
     const bookYear = new Date(book.year).toLocaleDateString("en-GB", {
       day: "2-digit",
       month: "2-digit",
@@ -73,14 +72,12 @@ function add_row() {
   const userEmail = document.getElementById("userEmail").value;
   const userPhone = document.getElementById("userPhone").value;
 
-  // Check if user details are filled
   if (!userName || !userEmail || !userPhone) {
     alert("Please fill in your name, email, and phone number.");
-    return; // Exit the function if the fields are not filled
+    return;
   }
   const table = document.getElementById("data_table");
 
-  // Creating a new empty row
   const newRow = `
     <tr>
       <td>${booksData.length + 1}</td>
@@ -95,11 +92,8 @@ function add_row() {
     </tr>
   `;
 
-  // Inserting the new row after the table heading
   const headerRow = table.querySelector("tr");
   headerRow.insertAdjacentHTML("afterend", newRow);
-
-  // Update serial numbers for all rows
 
   document.getElementById("new_title").focus();
 }
@@ -108,7 +102,7 @@ function saveNewBook() {
   const title = document.getElementById("new_title").innerText.trim();
   const author = document.getElementById("new_author").innerText.trim();
   const genre = document.getElementById("new_genre").innerText.trim();
-  const year = document.getElementById("new_year").value; // Get date value from input
+  const year = document.getElementById("new_year").value;
   const isbn = document.getElementById("new_isbn").innerText.trim();
   const userName = document.getElementById("userName").value;
   const userEmail = document.getElementById("userEmail").value;
@@ -155,7 +149,6 @@ function saveNewBook() {
   })
     .then((response) => response.json())
     .then((data) => {
-      // Create a new row element
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
       <td>${booksData.length + 1}</td>
@@ -168,14 +161,12 @@ function saveNewBook() {
     `;
       newRow.classList.add("animate-slide-in-down");
 
-      // Append the new row to the table
       const table = document.getElementById("data_table");
       table.appendChild(newRow);
 
-      // Update the local books data and re-render the table after the animation ends
       newRow.addEventListener("animationend", () => {
         booksData.push(data);
-        displayBooks(); // This will re-render the books table
+        displayBooks();
       });
     })
     .catch((error) => {
@@ -184,35 +175,29 @@ function saveNewBook() {
 }
 
 function edit_row(rowId) {
-  // First, check if there's any row already in edit mode
   const currentlyEditingRow = document.querySelector("tr.editing");
   if (currentlyEditingRow) {
-    // If there's a row being edited, cancel the edit
     cancelEdit(currentlyEditingRow.id.replace("row", ""));
   }
 
   const row = document.getElementById(`row${rowId}`);
-  row.classList.add("editing"); // Add a class to indicate that the row is being edited
+  row.classList.add("editing");
 
   const buttons = row.getElementsByTagName("button");
 
-  // Hide Edit button and show Update button
   buttons[0].style.display = "none";
   buttons[1].style.display = "inline-block";
 
-  // Enable content editing for fields
   const cells = row.getElementsByTagName("td");
   for (let i = 1; i <= 5; i++) {
     if (i !== 4) {
-      // Skip the date field for now
       cells[i].contentEditable = true;
     }
   }
 
-  // Handle the date field separately to avoid timezone issues
   const book = booksData[rowId - 1];
   const bookDate = new Date(book.year);
-  const localDate = bookDate.toISOString().split("T")[0]; // Get the date part without converting to UTC
+  const localDate = bookDate.toISOString().split("T")[0];
 
   cells[4].innerHTML = `<input type="date" id="edit_year_${rowId}" value="${localDate}">`;
 
@@ -220,23 +205,19 @@ function edit_row(rowId) {
 }
 
 function cancelEdit(rowId) {
-  // Revert the row back to non-editable state
   const row = document.getElementById(`row${rowId}`);
-  row.classList.remove("editing"); // Remove the editing class
+  row.classList.remove("editing");
 
   const buttons = row.getElementsByTagName("button");
 
-  // Show Edit button and hide Update button
   buttons[0].style.display = "inline-block";
   buttons[1].style.display = "none";
 
-  // Disable content editing for fields
   const cells = row.getElementsByTagName("td");
   for (let i = 1; i <= 5; i++) {
     cells[i].contentEditable = false;
   }
 
-  // Restore the original data for the row
   const book = booksData[rowId - 1];
   cells[1].innerText = book.title;
   cells[2].innerText = book.author;
@@ -249,15 +230,11 @@ function cancelEdit(rowId) {
   cells[5].innerText = book.isbn;
 }
 
-// Call this function when you want to cancel the edit on a row
-// For example, if the user clicks on another row's edit button
-// cancelEdit(rowId);
-
 function updateBook(bookId, rowId) {
   const title = document.getElementById(`title_${rowId}`).innerText.trim();
   const author = document.getElementById(`author_${rowId}`).innerText.trim();
   const genre = document.getElementById(`genre_${rowId}`).innerText.trim();
-  const year = document.getElementById(`edit_year_${rowId}`).value; // Get updated date value from the input field
+  const year = document.getElementById(`edit_year_${rowId}`).value;
   const isbn = document.getElementById(`isbn_${rowId}`).innerText.trim();
 
   if (
@@ -307,18 +284,16 @@ function updateBook(bookId, rowId) {
 function deleteBook(bookId) {
   const rowToDelete = document.querySelector(`tr[data-book-id="${bookId}"]`);
   if (rowToDelete) {
-    // Apply the animation class to the row
     rowToDelete.classList.add("animate-slide-out-right");
 
-    // Wait for the animation to finish before removing the row
     rowToDelete.addEventListener("animationend", () => {
       fetch(`${apiUrl}/${bookId}`, {
         method: "DELETE",
       })
         .then(() => {
           booksData = booksData.filter((book) => book._id !== bookId);
-          rowToDelete.remove(); // Remove the row from the DOM
-          renderBooksTable(); // Re-render the table if necessary
+          rowToDelete.remove();
+          renderBooksTable();
         })
         .catch((error) => {
           console.error("Error:", error);

@@ -1,9 +1,8 @@
-/* General Styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
-  background-color: #fafafa; /* Optional: added a light background color */
+  background-color: #fafafa;
 }
 
 .container {
@@ -11,12 +10,11 @@ body {
   justify-content: center;
 }
 
-/* Form Styles */
 #userForm {
   background-color: #fff;
   display: flex;
-  align-items: center; /* Align form items vertically */
-  justify-content: center; /* Align form items horizontally */
+  align-items: center;
+  justify-content: center;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -27,7 +25,7 @@ body {
 }
 
 #userForm label {
-  margin-right: 1px; /* Space between label and input */
+  margin-right: 1px;
 }
 
 #userForm input[type="text"],
@@ -53,7 +51,6 @@ body {
   background-color: #286090;
 }
 
-/* Button Styles */
 button {
   padding: 8px 12px;
   cursor: pointer;
@@ -68,27 +65,24 @@ button:hover {
   background-color: #16e821;
 }
 
-/* Table Styles */
-
 table {
   border-collapse: collapse;
   width: 100%;
   margin-top: 20px;
-  table-layout: fixed; /* Fixes table layout */
+  table-layout: fixed;
 }
 table th {
   background-color: #8cec87;
 }
 
-/* Set a fixed width for table cells */
 table th,
 table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
-  width: 100px; /* Adjust as needed */
-  overflow: hidden; /* Hide overflowing content */
-  white-space: nowrap; /* Prevent line breaks */
+  width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 button {
@@ -105,8 +99,6 @@ button:hover {
   background-color: #45a049;
 }
 
-/* styles.css */
-/* styles.css */
 @keyframes slideInDown {
   from {
     transform: translateY(-500%);
@@ -121,8 +113,6 @@ button:hover {
 .animate-slide-in-down {
   animation: slideInDown 1s ease-out forwards;
 }
-
-/* animations.css */
 
 @keyframes slide-out-right {
   0% {
@@ -141,7 +131,7 @@ button:hover {
 
 @media screen and (max-width: 768px) {
   #userForm {
-    justify-content: space-around; /* Distribute space between form items */
+    justify-content: space-around;
     width: 100%;
   }
 
@@ -153,7 +143,6 @@ button:hover {
 }
 
 @media screen and (max-width: 480px) {
-  /* Aligning the form elements in rows */
   #userForm {
     background-color: #ebeaea;
     display: grid;
@@ -162,30 +151,27 @@ button:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 30px;
     width: 75%;
-    column-gap: 5px; /* Adjust width as needed */
+    column-gap: 5px;
   }
 
-  /* Label styles */
   label {
-    grid-column: 1; /* Labels in first column */
-    align-self: center; /* Vertically center labels */
+    grid-column: 1;
+    align-self: center;
   }
 
-  /* Input styles */
   #userForm input[type="text"],
   #userForm input[type="email"],
   #userForm input[type="text"] {
-    grid-column: 2; /* Input fields in second column */
-    width: 100%; /* Input fields occupy full width */
+    grid-column: 2;
+    width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
   }
 
-  /* Submit button styles */
   button[type="submit"] {
-    grid-column: 1 / span 2; /* Spans across both columns */
+    grid-column: 1 / span 2;
     padding: 10px 20px;
     background-color: #4caf50;
     color: white;
@@ -196,37 +182,33 @@ button:hover {
 
   table {
     font-size: 14px;
-    margin: 20px; /* Adjust table font size for smaller screens */
+    margin: 20px;
   }
 
   table th,
   table td {
-    padding: 5px; /* Adjust cell padding for smaller screens */
+    padding: 5px;
   }
 
-  /* Hide table headers on mobile */
   table th {
     display: none;
   }
 
-  /* Display table data as block elements */
   table td {
     display: block;
     text-align: left;
-    border: none; /* Remove borders between cells */
+    border: none;
     position: relative;
-    padding-left: 50%; /* Add left padding for data cells */
+    padding-left: 50%;
   }
 
-  /* Style for data cell content */
   table td:before {
     position: absolute;
-    left: 6px; /* Adjust left position for content */
-    content: attr(data-label); /* Show table header label as content */
+    left: 6px;
+    content: attr(data-label);
     font-weight: bold;
   }
 
-  /* Define data labels */
   table td:nth-of-type(1):before {
     content: "ID";
   }

@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Define viewport for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="styles.css" />
+    <!-- Title of the webpage -->
     <title>Bookstore CRUD</title>
   </head>
   <body>
+    <!-- Container for the form -->
     <div class="container">
+      <!-- User input form -->
       <form id="userForm">
+        <!-- Name input field -->
         <label for="userName">Name:</label>
         <input type="text" id="userName" name="userName" required /><br /><br />
 
+        <!-- Email input field -->
         <label for="userEmail">Email:</label>
         <input
           type="email"
@@ -19,6 +26,7 @@
           required
         /><br /><br />
 
+        <!-- Phone input field -->
         <label for="userPhone">Phone:</label>
         <input
           type="text"
@@ -27,11 +35,15 @@
           required
         /><br /><br />
 
+        <!-- Submit button -->
         <button type="submit">Submit</button>
       </form>
     </div>
 
+    <!-- Button to add a new book -->
     <button onclick="add_row()">Add Book</button>
+
+    <!-- Table to display book data -->
     <table id="data_table">
       <!-- Table headers -->
       <tr>
@@ -43,8 +55,10 @@
         <th>ISBN</th>
         <th>Actions</th>
       </tr>
+      <!-- Book data rows will appear here -->
     </table>
 
+    <!-- Script file for dynamic functionality -->
     <script src="index.js"></script>
   </body>
 </html>

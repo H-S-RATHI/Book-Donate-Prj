@@ -17,8 +17,6 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 
-// Routes
-// server.js
 app.post("/books", async (req, res) => {
   try {
     const { title, author, genre, year, isbn, user } = req.body;
