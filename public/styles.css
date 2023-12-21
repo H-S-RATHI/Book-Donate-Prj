@@ -96,3 +96,20 @@ button:hover {
 .animate-slide-in-down {
   animation: slideInDown 1s ease-out forwards;
 }
+
+/* animations.css */
+
+@keyframes slide-out-right {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.animate-slide-out-right {
+  animation: slide-out-right 0.5s ease-out forwards;
+}

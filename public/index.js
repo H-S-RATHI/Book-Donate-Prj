@@ -44,7 +44,7 @@ function renderBooksTable() {
     });
 
     const row = `
-      <tr id="row${index + 1}">
+    <tr data-book-id="${book._id}" id="row${index + 1}">
         <td>${index + 1}</td>
         <td contenteditable="false" id="title_${index + 1}">${book.title}</td>
         <td contenteditable="false" id="author_${index + 1}">${book.author}</td>
@@ -262,16 +262,26 @@ function updateBook(bookId, rowId) {
 }
 
 function deleteBook(bookId) {
-  fetch(`${apiUrl}/${bookId}`, {
-    method: "DELETE",
-  })
-    .then(() => {
-      booksData = booksData.filter((book) => book._id !== bookId);
-      renderBooksTable();
-    })
-    .catch((error) => {
-      console.error("Error:", error);
+  const rowToDelete = document.querySelector(`tr[data-book-id="${bookId}"]`);
+  if (rowToDelete) {
+    // Apply the animation class to the row
+    rowToDelete.classList.add("animate-slide-out-right");
+
+    // Wait for the animation to finish before removing the row
+    rowToDelete.addEventListener("animationend", () => {
+      fetch(`${apiUrl}/${bookId}`, {
+        method: "DELETE",
+      })
+        .then(() => {
+          booksData = booksData.filter((book) => book._id !== bookId);
+          rowToDelete.remove(); // Remove the row from the DOM
+          renderBooksTable(); // Re-render the table if necessary
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     });
+  }
 }
 
 displayBooks();
