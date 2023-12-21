@@ -3,7 +3,12 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
-  background-color: #f7f7f7; /* Optional: added a light background color */
+  background-color: #fafafa; /* Optional: added a light background color */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
 }
 
 /* Form Styles */
@@ -11,43 +16,42 @@ body {
   background-color: #fff;
   display: flex;
   align-items: center; /* Align form items vertically */
-  justify-content: space-between; /* Distribute space between form items */
+  justify-content: center; /* Align form items horizontally */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  width: 100%;
+  width: 80%;
   box-sizing: border-box;
+  column-gap: 10px;
 }
 
 #userForm label {
-  margin-right: 10px; /* Space between label and input */
+  margin-right: 1px; /* Space between label and input */
 }
 
 #userForm input[type="text"],
 #userForm input[type="email"],
-#userForm input[type="tel"] {
+#userForm input[type="text"] {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  width: 15%;
 }
 
 #userForm button[type="submit"] {
   padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
+  background-color: #337ab7;
+  color: #ffffff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
 #userForm button[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #286090;
 }
-
-/* Table Styles */
-/* ... (keep your existing table styles) ... */
 
 /* Button Styles */
 button {
@@ -69,6 +73,9 @@ table {
   border-collapse: collapse;
   width: 100%;
   margin-top: 20px;
+}
+table th {
+  background-color: #8cec87;
 }
 
 table th,
@@ -124,4 +131,115 @@ button:hover {
 
 .animate-slide-out-right {
   animation: slide-out-right 0.5s ease-out forwards;
+}
+
+@media screen and (max-width: 768px) {
+  #userForm {
+    justify-content: space-around; /* Distribute space between form items */
+    width: 100%;
+  }
+
+  #userForm input[type="text"],
+  #userForm input[type="email"],
+  #userForm input[type="text"] {
+    width: 15%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Aligning the form elements in rows */
+  #userForm {
+    background-color: #ebeaea;
+    display: grid;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    width: 75%;
+    column-gap: 5px; /* Adjust width as needed */
+  }
+
+  /* Label styles */
+  label {
+    grid-column: 1; /* Labels in first column */
+    align-self: center; /* Vertically center labels */
+  }
+
+  /* Input styles */
+  #userForm input[type="text"],
+  #userForm input[type="email"],
+  #userForm input[type="text"] {
+    grid-column: 2; /* Input fields in second column */
+    width: 100%; /* Input fields occupy full width */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  /* Submit button styles */
+  button[type="submit"] {
+    grid-column: 1 / span 2; /* Spans across both columns */
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  table {
+    font-size: 14px;
+    margin: 20px; /* Adjust table font size for smaller screens */
+  }
+
+  table th,
+  table td {
+    padding: 5px; /* Adjust cell padding for smaller screens */
+  }
+
+  /* Hide table headers on mobile */
+  table th {
+    display: none;
+  }
+
+  /* Display table data as block elements */
+  table td {
+    display: block;
+    text-align: left;
+    border: none; /* Remove borders between cells */
+    position: relative;
+    padding-left: 50%; /* Add left padding for data cells */
+  }
+
+  /* Style for data cell content */
+  table td:before {
+    position: absolute;
+    left: 6px; /* Adjust left position for content */
+    content: attr(data-label); /* Show table header label as content */
+    font-weight: bold;
+  }
+
+  /* Define data labels */
+  table td:nth-of-type(1):before {
+    content: "ID";
+  }
+  table td:nth-of-type(2):before {
+    content: "Title";
+  }
+  table td:nth-of-type(3):before {
+    content: "Author";
+  }
+  table td:nth-of-type(4):before {
+    content: "Genre";
+  }
+  table td:nth-of-type(5):before {
+    content: "Year of Publication";
+  }
+  table td:nth-of-type(6):before {
+    content: "ISBN";
+  }
+  table td:nth-of-type(7):before {
+    content: "Actions";
+  }
 }

@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="styles.css" />
     <title>Bookstore CRUD</title>
   </head>
   <body>
-    <form id="userForm">
-      <label for="userName">Name:</label>
-      <input type="text" id="userName" name="userName" required /><br /><br />
+    <div class="container">
+      <form id="userForm">
+        <label for="userName">Name:</label>
+        <input type="text" id="userName" name="userName" required /><br /><br />
 
-      <label for="userEmail">Email:</label>
-      <input
-        type="email"
-        id="userEmail"
-        name="userEmail"
-        required
-      /><br /><br />
+        <label for="userEmail">Email:</label>
+        <input
+          type="email"
+          id="userEmail"
+          name="userEmail"
+          required
+        /><br /><br />
 
-      <label for="userPhone">Phone:</label>
-      <input type="text" id="userPhone" name="userPhone" required /><br /><br />
+        <label for="userPhone">Phone:</label>
+        <input
+          type="text"
+          id="userPhone"
+          name="userPhone"
+          required
+        /><br /><br />
 
-      <button type="submit">Submit</button>
-    </form>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
 
     <button onclick="add_row()">Add Book</button>
     <table id="data_table">
