@@ -68,6 +68,15 @@ function renderBooksTable() {
 }
 
 function add_row() {
+  const userName = document.getElementById("userName").value;
+  const userEmail = document.getElementById("userEmail").value;
+  const userPhone = document.getElementById("userPhone").value;
+
+  // Check if user details are filled
+  if (!userName || !userEmail || !userPhone) {
+    alert("Please fill in your name, email, and phone number.");
+    return; // Exit the function if the fields are not filled
+  }
   const table = document.getElementById("data_table");
 
   // Creating a new empty row
