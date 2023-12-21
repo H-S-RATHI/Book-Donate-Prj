@@ -5,7 +5,8 @@ let booksData = []; // To store books data locally
 document
   .getElementById("userForm")
   .addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault();
+    alert("Thank you for submitting your details!"); // Prevent the default form submission
     saveNewBook();
   });
 function displayBooks() {
