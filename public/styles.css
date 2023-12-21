@@ -69,20 +69,26 @@ button:hover {
 }
 
 /* Table Styles */
+
 table {
   border-collapse: collapse;
   width: 100%;
   margin-top: 20px;
+  table-layout: fixed; /* Fixes table layout */
 }
 table th {
   background-color: #8cec87;
 }
 
+/* Set a fixed width for table cells */
 table th,
 table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
+  width: 100px; /* Adjust as needed */
+  overflow: hidden; /* Hide overflowing content */
+  white-space: nowrap; /* Prevent line breaks */
 }
 
 button {
