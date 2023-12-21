@@ -1,23 +1,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Book = require("./bookModel"); // Assuming you have a Book model
+const Book = require("./public/bookModel");
 
 const app = express();
-app.use(express.json()); // for parsing application/json
+app.use(express.json());
 app.use(express.static("public"));
 // Base route
 app.get("/", function (req, res) {
   res.send("Welcome to our Bookstore API!");
 });
 
-// MongoDB connection
 mongoose
   .connect(
-    "mongodb+srv://12345678:A7zdJaK1wtVTly62@atlascluster.zwpd8k7.mongodb.net/?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
+    "mongodb+srv://12345678:A7zdJaK1wtVTly62@atlascluster.zwpd8k7.mongodb.net/?retryWrites=true&w=majority"
   )
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("Error connecting to MongoDB:", err));
