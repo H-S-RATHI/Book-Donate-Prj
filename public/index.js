@@ -2,6 +2,12 @@ let rowIdCounter = 1;
 const apiUrl = "http://localhost:3000/books";
 let booksData = []; // To store books data locally
 
+document
+  .getElementById("userForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the default form submission
+    saveNewBook();
+  });
 function displayBooks() {
   fetch(apiUrl)
     .then((response) => response.json())
@@ -94,6 +100,9 @@ function saveNewBook() {
   const genre = document.getElementById("new_genre").innerText.trim();
   const year = document.getElementById("new_year").value; // Get date value from input
   const isbn = document.getElementById("new_isbn").innerText.trim();
+  const userName = document.getElementById("userName").value;
+  const userEmail = document.getElementById("userEmail").value;
+  const userPhone = document.getElementById("userPhone").value;
 
   if (
     title === "" ||
@@ -120,6 +129,11 @@ function saveNewBook() {
     genre: genre,
     year: year,
     isbn: isbn,
+    user: {
+      name: userName,
+      email: userEmail,
+      phone: userPhone,
+    },
   };
 
   fetch(apiUrl, {

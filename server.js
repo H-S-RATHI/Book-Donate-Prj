@@ -18,10 +18,11 @@ mongoose
   .catch((err) => console.error("Error connecting to MongoDB:", err));
 
 // Routes
+// server.js
 app.post("/books", async (req, res) => {
   try {
-    const { title, author, genre, year, isbn } = req.body;
-    const book = new Book({ title, author, genre, year, isbn });
+    const { title, author, genre, year, isbn, user } = req.body;
+    const book = new Book({ title, author, genre, year, isbn, user });
     const savedBook = await book.save();
     res.json(savedBook);
   } catch (error) {

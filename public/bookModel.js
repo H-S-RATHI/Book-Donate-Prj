@@ -21,6 +21,11 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  user: {
+    name: String,
+    email: String,
+    phone: String,
+  },
 });
 
 const Book = mongoose.model("Book", bookSchema);
