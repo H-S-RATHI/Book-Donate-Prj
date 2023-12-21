@@ -3,38 +3,33 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
+  background-color: #f7f7f7; /* Optional: added a light background color */
 }
 
 /* Form Styles */
 #userForm {
-  background-color: #f0f0f0;
+  background-color: #fff;
   display: flex;
-  justify-content: center;
-  text-align: center;
+  align-items: center; /* Align form items vertically */
+  justify-content: space-between; /* Distribute space between form items */
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  width: 60%;
-  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #userForm label {
-  display: block;
-  margin-bottom: 5px;
+  margin-right: 10px; /* Space between label and input */
 }
 
 #userForm input[type="text"],
 #userForm input[type="email"],
 #userForm input[type="tel"] {
-  width: calc(33.33% - 20px);
   padding: 8px;
-  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 20px;
   box-sizing: border-box;
 }
 
@@ -45,11 +40,28 @@ body {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 20px;
 }
 
 #userForm button[type="submit"]:hover {
   background-color: #45a049;
+}
+
+/* Table Styles */
+/* ... (keep your existing table styles) ... */
+
+/* Button Styles */
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: white;
+  margin-right: 5px;
+}
+
+button:hover {
+  background-color: #16e821;
 }
 
 /* Table Styles */
