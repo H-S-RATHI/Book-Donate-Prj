@@ -184,7 +184,16 @@ function saveNewBook() {
 }
 
 function edit_row(rowId) {
+  // First, check if there's any row already in edit mode
+  const currentlyEditingRow = document.querySelector("tr.editing");
+  if (currentlyEditingRow) {
+    // If there's a row being edited, cancel the edit
+    cancelEdit(currentlyEditingRow.id.replace("row", ""));
+  }
+
   const row = document.getElementById(`row${rowId}`);
+  row.classList.add("editing"); // Add a class to indicate that the row is being edited
+
   const buttons = row.getElementsByTagName("button");
 
   // Hide Edit button and show Update button
@@ -209,6 +218,40 @@ function edit_row(rowId) {
 
   document.getElementById(`title_${rowId}`).focus();
 }
+
+function cancelEdit(rowId) {
+  // Revert the row back to non-editable state
+  const row = document.getElementById(`row${rowId}`);
+  row.classList.remove("editing"); // Remove the editing class
+
+  const buttons = row.getElementsByTagName("button");
+
+  // Show Edit button and hide Update button
+  buttons[0].style.display = "inline-block";
+  buttons[1].style.display = "none";
+
+  // Disable content editing for fields
+  const cells = row.getElementsByTagName("td");
+  for (let i = 1; i <= 5; i++) {
+    cells[i].contentEditable = false;
+  }
+
+  // Restore the original data for the row
+  const book = booksData[rowId - 1];
+  cells[1].innerText = book.title;
+  cells[2].innerText = book.author;
+  cells[3].innerText = book.genre;
+  cells[4].innerText = new Date(book.year).toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+  cells[5].innerText = book.isbn;
+}
+
+// Call this function when you want to cancel the edit on a row
+// For example, if the user clicks on another row's edit button
+// cancelEdit(rowId);
 
 function updateBook(bookId, rowId) {
   const title = document.getElementById(`title_${rowId}`).innerText.trim();
