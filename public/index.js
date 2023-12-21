@@ -1,12 +1,23 @@
+// Variable to track the row ID counter
 let rowIdCounter = 1;
+
+// API endpoint for books data
 const apiUrl = "http://localhost:3000/books";
+
+// Array to store books data retrieved from the API
 let booksData = [];
 
+// Event listener for form submission
 document
   .getElementById("userForm")
   .addEventListener("submit", function (event) {
+    // Prevents the default form submission behavior
     event.preventDefault();
+
+    // Displays a thank you message upon form submission
     alert("Thank you for submitting your details!");
+
+    // Calls the function to save new book details
     saveNewBook();
   });
 function displayBooks() {
