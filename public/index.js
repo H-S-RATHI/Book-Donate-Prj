@@ -84,7 +84,7 @@ function add_row() {
   const userPhone = document.getElementById("userPhone").value;
 
   if (!userName || !userEmail || !userPhone) {
-    alert("Please fill in your name, email, and phone number.");
+    alert("Please fill your name, email, and phone number.");
     return;
   }
   const table = document.getElementById("data_table");
