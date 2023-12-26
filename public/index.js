@@ -20,6 +20,8 @@ document
     // Calls the function to save new book details
     saveNewBook();
   });
+
+// Function to fetch and display books from the API
 function displayBooks() {
   fetch(apiUrl)
     .then((response) => response.json())
@@ -32,6 +34,7 @@ function displayBooks() {
     });
 }
 
+// Function to render the books table in the HTML
 function renderBooksTable() {
   const table = document.getElementById("data_table");
   table.innerHTML = `
@@ -78,6 +81,7 @@ function renderBooksTable() {
   });
 }
 
+// Function to add a new row to the table
 function add_row() {
   const userName = document.getElementById("userName").value;
   const userEmail = document.getElementById("userEmail").value;
@@ -109,6 +113,7 @@ function add_row() {
   document.getElementById("new_title").focus();
 }
 
+// Function to save a new book
 function saveNewBook() {
   const title = document.getElementById("new_title").innerText.trim();
   const author = document.getElementById("new_author").innerText.trim();
@@ -185,6 +190,7 @@ function saveNewBook() {
     });
 }
 
+// Function to edit a row
 function edit_row(rowId) {
   const currentlyEditingRow = document.querySelector("tr.editing");
   if (currentlyEditingRow) {
@@ -215,6 +221,7 @@ function edit_row(rowId) {
   document.getElementById(`title_${rowId}`).focus();
 }
 
+// Function to cancel the edit of a row
 function cancelEdit(rowId) {
   const row = document.getElementById(`row${rowId}`);
   row.classList.remove("editing");
@@ -241,6 +248,7 @@ function cancelEdit(rowId) {
   cells[5].innerText = book.isbn;
 }
 
+// Function to update a book
 function updateBook(bookId, rowId) {
   const title = document.getElementById(`title_${rowId}`).innerText.trim();
   const author = document.getElementById(`author_${rowId}`).innerText.trim();
@@ -292,6 +300,7 @@ function updateBook(bookId, rowId) {
     });
 }
 
+// Function to delete a book
 function deleteBook(bookId) {
   const rowToDelete = document.querySelector(`tr[data-book-id="${bookId}"]`);
   if (rowToDelete) {
@@ -313,4 +322,34 @@ function deleteBook(bookId) {
   }
 }
 
+// Function to dump the current app state to JSON
+function dumpAppStateToJson() {
+  const userName = document.getElementById("userName").value;
+  const userEmail = document.getElementById("userEmail").value;
+  const userPhone = document.getElementById("userPhone").value;
+
+  const userState = {
+    name: userName,
+    phone: userPhone,
+    email: userEmail,
+    books: booksData.map((book, index) => ({
+      sno: index + 1,
+      bookTitle: book.title,
+      author: book.author,
+      genre: book.genre,
+      yop: new Date(book.year).toLocaleDateString(),
+      isbn: book.isbn,
+    })),
+  };
+
+  const jsonString = JSON.stringify(userState, null, 2);
+  console.log(jsonString);
+}
+
+// Event listener for a button click to trigger the state dump
+document
+  .getElementById("dumpStateButton")
+  .addEventListener("click", dumpAppStateToJson);
+
+// Initial display of books
 displayBooks();
