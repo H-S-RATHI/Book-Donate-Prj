@@ -6,10 +6,12 @@
     <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="styles.css" />
     <!-- Title of the webpage -->
-    <title>Book Donate CRUD</title>
+    <title>Book Donate</title>
   </head>
   <body>
+    <!-- Header -->
     <h1>Book Donate</h1>
+
     <!-- Container for the form -->
     <div class="container">
       <!-- User input form -->
@@ -40,9 +42,16 @@
         <button type="submit">Submit</button>
       </form>
     </div>
+    <div class="dsb">
+      <!-- Button to add a new book -->
+      <button class="add_button" onclick="add_row()">Add Book</button>
+      <!-- Button to dump state to JSON -->
+      <button id="dumpStateButton" style="text-align: center">
+        Dump State to JSON
+      </button>
+    </div>
 
-    <!-- Button to add a new book -->
-    <button class="add_button" onclick="add_row()">Add Book</button>
+    <!-- Container for the table -->
     <div class="table_container">
       <!-- Table to display book data -->
       <table id="data_table">
