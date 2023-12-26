@@ -115,7 +115,13 @@ button {
 button:hover {
   background-color: #45a049;
 }
-
+.dsb {
+  display: flex;
+  justify-content: space-between;
+}
+#dumpStateButton {
+  margin-right: 5%;
+}
 @keyframes slideInDown {
   from {
     transform: translateY(-500%);
@@ -153,6 +159,9 @@ button:hover {
   }
   .add_button {
     margin-left: 1%;
+  }
+  #dumpStateButton {
+    margin-right: 0.5%;
   }
   table {
     width: 100%;
@@ -204,6 +213,11 @@ button:hover {
     padding: 10px;
   }
 
+  .data_table {
+    display: flex;
+    justify-content: center;
+  }
+
   .table-container {
     display: flex;
     justify-content: center;
@@ -247,13 +261,13 @@ button:hover {
   .add_button {
     margin-left: 15%;
   }
+  #dumpStateButton {
+    margin-right: 15%;
+  }
 
   table {
     font-size: 12px;
-    margin: 20px;
-    margin-left: 20%;
-
-    width: 100%;
+    width: 70%;
   }
 
   table th,
@@ -301,5 +315,18 @@ button:hover {
   }
   table td:nth-of-type(7):before {
     content: "Actions";
+  }
+}
+
+@media screen and (max-width: 400px) {
+  table {
+    font-size: 12px;
+    width: 100%;
+  }
+  .add_button {
+    margin-left: 0;
+  }
+  #dumpStateButton {
+    margin-right: 0;
   }
 }
